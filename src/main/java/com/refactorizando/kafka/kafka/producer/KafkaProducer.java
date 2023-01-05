@@ -1,5 +1,6 @@
 package com.refactorizando.kafka.kafka.producer;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -7,6 +8,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
 public class KafkaProducer {
 
   @Value("${spring.kafka.topic.name}")
