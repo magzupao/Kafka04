@@ -25,4 +25,9 @@ public class KafkaController {
       return ResponseEntity.ok("KafkaProducer es null!!");
     }
   }
+  @PostMapping("/messages/send")
+  public ResponseEntity<String> sendMessage(@RequestBody  String message) {
+    kafkaProducer.sendMessage(message);
+    return ResponseEntity.ok(message);
+  }
 }
