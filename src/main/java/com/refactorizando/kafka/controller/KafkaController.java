@@ -13,16 +13,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/kafka")
 public class KafkaController {
 
-  private KafkaProducer kafkaProducer;
-
-  public KafkaController(KafkaProducer kafkaProducer) {
-    this.kafkaProducer = kafkaProducer;
-  }
+  private final KafkaProducer kafkaProducer;
 
   // http:localhost:8080/api/v1/kafka/publish?message=hello world
   @GetMapping("/publish")
   public ResponseEntity<String> publish(@RequestParam("message") String message){
-    kafkaProducer.sendMessage(message);
-    return ResponseEntity.ok("Message sent to the topic");
+    if(kafkaProducer!=null){
+      kafkaProducer.sendMessage(message);
+      return ResponseEntity.ok("Message sent to the topic");
+    }else {
+      return ResponseEntity.ok("KafkaProducer es null!!");
+    }
   }
 }
